@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "header": "What is Zylo?",
+    "body": "Zylo is a next-generation streaming platform that combines AI-driven recommendations, multilingual accessibility, and adaptive streaming to enhance your viewing experience. Discover, watch, and enjoy content like never before."
+  },
+  {
+    "id": 2,
+    "header": "How is Zylo different from other streaming platforms?",
+    "body":"Unlike traditional platforms, Zylo leverages AI to personalize recommendations, provides real-time subtitle and audio translations, and runs on a cloud-native infrastructure with DevOps automation for seamless updates and scalability."
+  },
+  {
+    "id": 3,
+    "header": "Can I watch Zylo on multiple devices?",
+    "body": "Absolutely! Zylo supports seamless streaming across smartphones, tablets, smart TVs, laptops, and more. Enjoy high-quality content anytime, anywhere."
+  },
+  {
+    "id": 4,
+    "header": "What languages does Zylo support?",
+    "body": "With real-time AI-powered translations, Zylo offers subtitles and dubbing in multiple languages, making global content more accessible than ever."
+  },
+  {
+    "id": 5,
+    "header": "What can I watch ?",
+    "body": "Zylo has an extensive library of feature films, documentaries, TV programmes, anime, and more. Watch as much as you want, any time you want."
+  }
+]

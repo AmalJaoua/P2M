@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "title": "AI-Powered Personalized Streaming",
+    "subTitle": "Discover content tailored to your tastes with our advanced AI recommendations.",
+    "image": "../images/misc/home-ai.png",
+    "alt": "Zylo AI recommendations",
+    "direction": "row"
+  },
+  {
+    "id": 2,
+    "title": "Seamless Multilingual Experience",
+    "subTitle": "Enjoy real-time subtitle and audio translation for a global viewing experience.",
+    "image": "../images/misc/home-translation.jpg",
+    "alt": "Multilingual subtitles and dubbing",
+    "direction": "row-reverse"
+  },
+  {
+    "id": 3,
+    "title": "Adaptive Streaming, Anytime, Anywhere",
+    "subTitle": "Watch your favorite content in the best quality, whether on mobile, tablet, laptop, or TV.",
+    "image": "../images/misc/home-imac.jpg",
+    "alt": "Adaptive streaming across devices",
+    "direction": "row"
+  }
+]

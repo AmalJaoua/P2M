@@ -1,0 +1,125 @@
+/* ############### OptForm Section ############### */
+
+.optform-wrapper {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 20px;
+  margin-bottom: 70px;
+  padding: 0 20px;
+}
+
+@media (max-width: 950px) {
+  .optform-wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.optform-email {
+  max-width: 450px;
+  width: 100%;
+  border: 0;
+  padding: 0px 0px 0px 20px;
+  height: 60px;
+  font-size: 20px;
+  border-radius:50px;
+}
+
+.optform-button {
+  width: fit-content;
+  height: 100%;
+  background: #724C9C;
+  color: #fff;
+  text-transform: uppercase;
+  padding: 0 32px;
+  font-size: 26px;
+  border: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border-radius:50px;
+}
+
+.optform-button a {
+  color: white;
+}
+
+@media (max-width: 950px) {
+  .optform-button {
+    height: 50px;
+    font-size: 16px;
+    margin-top: 20px;
+    font-weight: bold;
+  }
+}
+
+.optform-button-image {
+  margin-left: 10px;
+  filter: brightness(0) invert(1);
+  width: 24px;
+}
+
+.optform-button-image img:hover {
+  background: #724C9C;
+}
+
+.optform-text {
+  font-size: 19px;
+  color: #fff;
+  text-align: center;
+  padding: 0 20px;
+}
+
+
+.cssbuttons-io-button {
+  background: #724C9C;
+  color: white;
+  font-family: inherit;
+  padding: 0.35em;
+  padding-left: 1.2em;
+  font-size: 17px;
+  font-weight: 500;
+  border-radius: 50px;
+  border: none;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  box-shadow: inset 0 0 1.6em -0.6em #714da6;
+  overflow: hidden;
+  position: relative;
+  padding-right: 3.3em;
+  cursor: pointer;
+}
+
+.cssbuttons-io-button .icon {
+  background: white;
+  margin-left: 1em;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.5em;
+  width: 2.2em;
+  border-radius: 40px;
+  box-shadow: 0.1em 0.1em 0.6em 0.2em #7b52b9;
+  right: 0.3em;
+  transition: all 0.3s;
+}
+
+.cssbuttons-io-button:hover .icon {
+  width: calc(100% - 0.6em);
+}
+
+.cssbuttons-io-button .icon svg {
+  width: 1.1em;
+  transition: transform 0.3s;
+  color: #7b52b9;
+}
+
+.cssbuttons-io-button:hover .icon svg {
+  transform: translateX(0.1em);
+}
+
+.cssbuttons-io-button:active .icon {
+  transform: scale(0.95);
+}
