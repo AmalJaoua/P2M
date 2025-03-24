@@ -1,26 +1,26 @@
 [
   {
     "id": 1,
-    "title": "Enjoy on your TV.",
-    "subTitle": "Watch on smart TVs, PlayStation, Xbox, Chromecast, Apple TV, Blu-ray players and more.",
-    "image": "../images/misc/home-tv.jpg",
-    "alt": "Tiger King on Netflix",
+    "title": "AI-Powered Personalized Streaming",
+    "subTitle": "Discover content tailored to your tastes with our advanced AI recommendations.",
+    "image": "../images/misc/home-ai.png",
+    "alt": "Zylo AI recommendations",
     "direction": "row"
   },
   {
     "id": 2,
-    "title": "Download your programmes to watch on the go.",
-    "subTitle": "Save your data and watch all your favourites offline.",
-    "image": "../images/misc/home-mobile.jpg",
-    "alt": "Tiger King on Netflix",
+    "title": "Seamless Multilingual Experience",
+    "subTitle": "Enjoy real-time subtitle and audio translation for a global viewing experience.",
+    "image": "../images/misc/home-translation.jpg",
+    "alt": "Multilingual subtitles and dubbing",
     "direction": "row-reverse"
   },
   {
     "id": 3,
-    "title": "Watch everywhere.",
-    "subTitle": "Stream unlimited films and TV programmes on your phone, tablet, laptop and TV without paying more.",
+    "title": "Adaptive Streaming, Anytime, Anywhere",
+    "subTitle": "Watch your favorite content in the best quality, whether on mobile, tablet, laptop, or TV.",
     "image": "../images/misc/home-imac.jpg",
-    "alt": "Money Heist on Netflix",
+    "alt": "Adaptive streaming across devices",
     "direction": "row"
   }
 ]

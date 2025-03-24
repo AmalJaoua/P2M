@@ -13,10 +13,9 @@ import SignFormText from "../components/SignForm/SignFormText";
 import SignFormLink from "../components/SignForm/SignFormLink";
 import SignFormCaptcha from "../components/SignForm/SignFormCaptcha";
 import SignFormError from "../components/SignForm/SignFormError";
-import Warning from "../components/Header/Warning";
 
 function SigninPage() {
-  const navigate = useNavigate();  // Using useNavigate hook
+  const navigate = useNavigate(); 
 
   const [emailAddress, setEmailAddress] = useState("");
   const [password, setPassword] = useState("");
@@ -45,7 +44,6 @@ function SigninPage() {
         </NavBar>
         <SignFormWrapper>
           <SignFormBase onSubmit={handleSubmit} method="POST">
-            <Warning>NOT official Netflix</Warning>
             <SignFormTitle>Sign In</SignFormTitle>
             {error ? <SignFormError>{error}</SignFormError> : null}
             <SignFormInput
@@ -63,7 +61,7 @@ function SigninPage() {
             />
             <SignFormButton disabled={IsInvalid}>Sign In</SignFormButton>
             <SignFormText>
-              New to Netflix?
+              New to Zylo?
               <SignFormLink href="/signup">Sign up now.</SignFormLink>
             </SignFormText>
             <SignFormCaptcha>

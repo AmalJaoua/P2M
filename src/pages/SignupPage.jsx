@@ -13,7 +13,6 @@ import SignFormText from "../components/SignForm/SignFormText";
 import SignFormLink from "../components/SignForm/SignFormLink";
 import SignFormCaptcha from "../components/SignForm/SignFormCaptcha";
 import SignFormError from "../components/SignForm/SignFormError";
-import Warning from "../components/Header/Warning";
 
 function SignupPage() {
   const navigate = useNavigate();  // Using useNavigate hook
@@ -49,12 +48,11 @@ function SignupPage() {
         </NavBar>
         <SignFormWrapper>
           <SignFormBase onSubmit={handleSubmit} method="POST">
-            <Warning>NOT official Netflix</Warning>
             <SignFormTitle>Sign Up</SignFormTitle>
             {error ? <SignFormError>{error}</SignFormError> : null}
             <SignFormInput
               type="text"
-              placeholder="First Name"
+              placeholder="Full Name"
               value={firstName}
               onChange={({ target }) => setFirstName(target.value)}
             />

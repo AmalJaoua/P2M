@@ -25,6 +25,7 @@
   font-size: 32px;
   font-weight: bold;
   margin-bottom: 28px;
+  text-align: center;
 }
 
 .sign-form-error {
@@ -55,7 +56,7 @@
 }
 
 .sign-form-Button {
-  background: #e50914;
+  background: #724C9C;
   border-radius: 4px;
   font-size: 16px;
   font-weight: bold;
@@ -67,7 +68,7 @@
 }
 
 .sign-form-Button:disabled {
-  opacity: 0.3;
+  opacity: 0.6;
 }
 
 .sign-form-text {
@@ -94,4 +95,25 @@
   font-size: 13px;
   line-height: normal;
   color: #8c8c8c;
+}
+
+
+input:-webkit-autofill {
+  background-color: transparent !important;
+  color: inherit !important;
+  -webkit-box-shadow: 0 0 0px 1000px #333 inset !important; 
+  box-shadow: 0 0 0px 1000px #333 inset !important; 
+}
+
+input:-webkit-autofill:focus {
+  background-color: #DCCAE9 !important; 
+  -webkit-box-shadow: 0 0 0px 1000px #DCCAE9 inset !important;
+  box-shadow: 0 0 0px 1000px #DCCAE9 inset !important;
+  
+}
+input:-webkit-autofill:focus::first-line{
+  color: black !important;
+}
+input:-webkit-autofill::first-line {
+  color: white!important; ;
 }

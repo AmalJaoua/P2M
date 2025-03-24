@@ -12,13 +12,11 @@ function FooterCompound() {
       <FooterRow>
         <FooterColumn>
           <FooterLink>FAQ</FooterLink>
-          <FooterLink>Investor Relations</FooterLink>
           <FooterLink>Privacy</FooterLink>
           <FooterLink>Speed Test</FooterLink>
         </FooterColumn>
         <FooterColumn>
           <FooterLink>Help Center</FooterLink>
-          <FooterLink>Jobs</FooterLink>
           <FooterLink>Cookie Preferences</FooterLink>
           <FooterLink>Legal Notices</FooterLink>
         </FooterColumn>
@@ -26,7 +24,6 @@ function FooterCompound() {
           <FooterLink>Account</FooterLink>
           <FooterLink>Ways to Watch</FooterLink>
           <FooterLink>Corporate Information</FooterLink>
-          <FooterLink>Netflix Originals</FooterLink>
         </FooterColumn>
         <FooterColumn>
           <FooterLink>Media Center</FooterLink>
