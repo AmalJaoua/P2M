@@ -69,7 +69,7 @@ function BrowsePage() {
             Forever alone in a crowd, failed comedian Arthur Fleck seeks connection as he walks
             the streets of Gotham City...
           </FeatureSubTitle>
-          <PlayButton onClick={() => setShowPlayer(true)}>Play</PlayButton>
+          <PlayButton onClick={() => setShowPlayer(true)}></PlayButton>
           {showPlayer ? (
             <PlayerOverlay onClick={() => setShowPlayer(false)}>
               <PlayerVideo src="./videos/video.mp4" type="video/mp4" />
@@ -104,7 +104,7 @@ function BrowsePage() {
                 <CardTitle>{activeItem.title}</CardTitle>
                 <CardDescription>{activeItem.description}</CardDescription>
                 <CardFeatureClose onClick={() => setShowCardFeature(false)} />
-                <PlayButton onClick={() => setShowPlayer(true)}>Play</PlayButton>
+                <PlayButton onClick={() => setShowPlayer(true)}></PlayButton>
                 {showPlayer ? (
                   <PlayerOverlay onClick={() => setShowPlayer(false)}>
                     <PlayerVideo src="../videos/video.mp4" type="video/mp4" />
