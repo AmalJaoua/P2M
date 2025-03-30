@@ -1,0 +1,135 @@
+ 
+  .search-group {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: fit-content;
+  }
+  
+  .search-input {
+    width: 100%;
+    height: 40px;
+    padding: 0 1rem;
+    padding-left: 2.5rem;
+    border: 2px solid #3C2454; 
+    border-radius: 4px;
+    outline: none;
+    background-color: #1B0F22; 
+    color: #DCCAE9; 
+    transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+  }
+  
+  .search-input::placeholder {
+    color: #724C9C; 
+  }
+  
+  .search-input:hover {
+    background-color: #3C2454; 
+    border-color: #9356A0; 
+  }
+  
+  .search-icon {
+    position: absolute;
+    left: 1rem;
+    width: 1rem;
+    height: 1rem;
+    color: #724C9C; 
+  }
+
+.search-container {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .search-icon-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #724C9C;
+    transition: all 0.2s ease;
+    border-radius: 50%;
+  }
+  
+  .search-icon-button:hover {
+    color: #9356A0;
+  }
+  
+  .search-icon {
+    transition: transform 0.2s ease;
+  }
+  
+  .search-panel {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 12px;
+    border-radius: 20px;
+    z-index: 100;
+    min-width: 280px;
+    animation: fadeIn 0.2s ease-out;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .search-form {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .search-field {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  
+  .search-field:focus {
+    border-color: #724C9C;
+    box-shadow: 0 0 0 2px (#DCCAE9, 0.2);
+  }
+  
+  .search-submit {
+    padding: 8px;
+    background-color: #724C9C;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+  }
+  
+  .search-submit:hover {
+    background-color: #9356A0;
+  }
+
+  .search-field:focus-visible,
+  .search-icon-button:focus-visible {
+    outline: 2px solid #724C9C;
+    outline-offset: 2px;
+  }
+
+  

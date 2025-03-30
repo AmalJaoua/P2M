@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
 import { series as seriesData, films as filmsData } from "../seeder1";
 import HeaderWrapper from "../components/Header/HeaderWrapper";
 import NavBar from "../components/Header/NavBar";
@@ -21,6 +22,7 @@ import CardFeatureClose from "../components/Movies/CardFeatureClose";
 import PlayerVideo from "../components/Movies/PlayerVideo";
 import PlayerOverlay from "../components/Movies/PlayerOverlay";
 import FooterCompound from "../compounds/FooterCompound";
+import WishlistButton from "../components/Header/WishlistButton";
 
 function BrowsePage() {
   let series = [
@@ -38,8 +40,9 @@ function BrowsePage() {
     { title: "Suspense", data: filmsData.filter((item) => item.genre === "suspense") },
     { title: "Romance", data: filmsData.filter((item) => item.genre === "romance") },
   ];
-
-  const [category, setCategory] = useState("films");
+  const location = useLocation();
+  const initialCategory = location.state?.category || "films";
+  const [category, setCategory] = useState(initialCategory);
   const currentCategory = category === "films" ? films : series;
   const [showCardFeature, setShowCardFeature] = useState(false);
   const [activeItem, setActiveItem] = useState(null);
@@ -69,7 +72,10 @@ function BrowsePage() {
             Forever alone in a crowd, failed comedian Arthur Fleck seeks connection as he walks
             the streets of Gotham City...
           </FeatureSubTitle>
-          <PlayButton onClick={() => setShowPlayer(true)}>Play</PlayButton>
+          <div className="action-buttons">
+          <PlayButton onClick={() => setShowPlayer(true)}></PlayButton>
+          <WishlistButton/>
+          </div>
           {showPlayer ? (
             <PlayerOverlay onClick={() => setShowPlayer(false)}>
               <PlayerVideo src="./videos/video.mp4" type="video/mp4" />
@@ -104,7 +110,10 @@ function BrowsePage() {
                 <CardTitle>{activeItem.title}</CardTitle>
                 <CardDescription>{activeItem.description}</CardDescription>
                 <CardFeatureClose onClick={() => setShowCardFeature(false)} />
-                <PlayButton onClick={() => setShowPlayer(true)}>Play</PlayButton>
+                <div className="action-buttons">
+                  <PlayButton onClick={() => setShowPlayer(true)}></PlayButton>
+                  <WishlistButton/>
+                </div>
                 {showPlayer ? (
                   <PlayerOverlay onClick={() => setShowPlayer(false)}>
                     <PlayerVideo src="../videos/video.mp4" type="video/mp4" />
