@@ -4,7 +4,7 @@ import "./HeaderStyles.css";
 function Logo({ children, ...restProps }) {
   return (
     <div>
-      <a href="/" {...restProps}>
+      <a href="/browse" {...restProps}>
         {children}
         <img className="logo" href="/" src="./images/misc/Full Logo.png" alt="Zylo logo" />
       </a>

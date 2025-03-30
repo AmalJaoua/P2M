@@ -1,5 +1,5 @@
 import React from "react";
-import "./HeaderStyles.css";
+import "./FeatureStyles.css";
 
 function PlayButton({ children, ...restProps }) {
   return (
