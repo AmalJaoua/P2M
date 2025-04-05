@@ -4,6 +4,8 @@ const cors = require('cors'); // Import the CORS package
 const PORT = process.env.PORT || 3000;
 const app = express();
 const authRoutes = require('./routes/auth.routes');
+const profileRoutes = require('./routes/profile.routes');
+
 const mongoose = require('mongoose');
 const config = require('./config/config.js');
 const cookieParser = require('cookie-parser');
@@ -25,7 +27,7 @@ mongoose.connect(config.mongoUri, {
       process.exit(1); // Exit the process if the connection fails
     });
 app.use('/auth', authRoutes); // Authentication routes (signup/login)
-
+app.use('/profile', profileRoutes);
 app.listen(PORT, () => {
     console.log(`Server is running at http://localhost:${PORT}`);
 });

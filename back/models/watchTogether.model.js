@@ -4,6 +4,7 @@ const WatchTogetherSchema = new mongoose.Schema({
   password: { type: Number, required: true },
   usersInSession: [
     {
+      _id: false,
       user_id: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     }
   ],
