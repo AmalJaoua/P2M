@@ -6,6 +6,7 @@ const ContentSchema = new mongoose.Schema({
   description: { type: String },
   release_year: { type: Date },
   genres: [{ type: String }],
+  director:{type: String},
   cast: [{ type: String }],
   watch_count: { type: Number, default: 0 },
   languages_available: [{ type: String }],
@@ -14,6 +15,7 @@ const ContentSchema = new mongoose.Schema({
     French: { type: String },
     Arabic: { type: String }
   },
+  imdb_id: { type: String },
   streaming_links: [{ type: String }],
   episodes: [
     {
