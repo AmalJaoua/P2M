@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";  // Use useNavigate instead of useHistory
+import { useNavigate } from "react-router-dom";
 import HeaderWrapper from "../components/Header/HeaderWrapper";
 import NavBar from "../components/Header/NavBar";
 import Logo from "../components/Header/Logo";
@@ -15,28 +15,64 @@ import SignFormCaptcha from "../components/SignForm/SignFormCaptcha";
 import SignFormError from "../components/SignForm/SignFormError";
 
 function SignupPage() {
-  const navigate = useNavigate();  // Using useNavigate hook
+  const navigate = useNavigate();
 
   const [firstName, setFirstName] = useState("");
   const [emailAddress, setEmailAddress] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
+  const [passwordsMatch, setPasswordsMatch] = useState(true);
 
-  const IsInvalid = password === "" || emailAddress === "" || firstName === "";
+  const IsInvalid =
+    password === "" ||
+    emailAddress === "" ||
+    firstName === "" ||
+    confirmPassword === "" ||
+    !passwordsMatch;
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
+    setError(""); // Clear previous errors
 
-    // Simulating sign-up success
-    if (emailAddress && password) {
-      // Simulate successful sign-up
+    if (password !== confirmPassword) {
+      setPasswordsMatch(false);
+      setError("Passwords do not match");
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:3000/auth/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+       
+        body: JSON.stringify({
+          username: firstName,
+          email: emailAddress,
+          password: password,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        // Show error from backend if available
+        throw new Error(data.message || "Signup failed");
+      }
+
+      // Reset form
       setFirstName("");
       setEmailAddress("");
       setPassword("");
-      navigate("/browse");  // Using navigate to redirect to /browse
-    } else {
-      // Simulate error for invalid form data
-      setError("Please fill in all fields correctly");
+      setConfirmPassword("");
+      setPasswordsMatch(true);
+
+      // Redirect to /browse or wherever you want
+      navigate("/signin");
+    } catch (err) {
+      setError(err.message);
     }
   }
 
@@ -49,7 +85,7 @@ function SignupPage() {
         <SignFormWrapper>
           <SignFormBase onSubmit={handleSubmit} method="POST">
             <SignFormTitle>Sign Up</SignFormTitle>
-            {error ? <SignFormError>{error}</SignFormError> : null}
+            {error && <SignFormError>{error}</SignFormError>}
             <SignFormInput
               type="text"
               placeholder="Full Name"
@@ -69,6 +105,17 @@ function SignupPage() {
               value={password}
               onChange={({ target }) => setPassword(target.value)}
             />
+            <SignFormInput
+              type="password"
+              placeholder="Confirm Password"
+              autoComplete="off"
+              value={confirmPassword}
+              onChange={({ target }) => {
+                setConfirmPassword(target.value);
+                if (error === "Passwords do not match") setPasswordsMatch(true);
+              }}
+            />
+            
             <SignFormButton disabled={IsInvalid}>Sign Up</SignFormButton>
             <SignFormText>
               Already a user?

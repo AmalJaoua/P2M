@@ -15,7 +15,7 @@ import SignFormCaptcha from "../components/SignForm/SignFormCaptcha";
 import SignFormError from "../components/SignForm/SignFormError";
 
 function SigninPage() {
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const [emailAddress, setEmailAddress] = useState("");
   const [password, setPassword] = useState("");
@@ -23,16 +23,39 @@ function SigninPage() {
 
   const IsInvalid = password === "" || emailAddress === "";
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
 
-    // Simulate sign-in success
-    if (emailAddress && password) {
-      setEmailAddress("");
-      setPassword("");
-      navigate("/browse");  // Using navigate to redirect
-    } else {
+    if (!emailAddress || !password) {
       setError("Please fill in all fields correctly");
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:3000/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include", // important for http-only cookies
+        body: JSON.stringify({
+          email: emailAddress,
+          password,
+        }),
+      });
+
+      if (!response.ok) {
+        const data = await response.json();
+        setError(data.message || "Login failed");
+      } else {
+        setEmailAddress("");
+        setPassword("");
+        // Optionally navigate somewhere, or wait for backend to redirect
+        navigate("/browse"); 
+      }
+    } catch (err) {
+      setError("Server error. Please try again later.");
+      console.error(err);
     }
   }
 
@@ -75,5 +98,6 @@ function SigninPage() {
     </>
   );
 }
+
 
 export default SigninPage;

@@ -14,7 +14,10 @@ const cookieParser = require('cookie-parser');
 // Middleware to parse JSON request bodies
 app.use(express.json());
 app.use(cookieParser()); // Required to read cookies
-app.use(cors()); // This will allow all origins by default
+app.use(cors({
+  origin: 'http://localhost:5173',        
+  credentials: true,  
+}));
 // Routes
 
 // Connect to MongoDB
