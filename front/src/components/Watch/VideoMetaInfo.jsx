@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import PlayButton from "../Header/PlayButton";
 import WishlistButton from '../Header/WishlistButton';
+import HeartButton from '../Header/HeartButton';
 import PlayerOverlay from "../Movies/PlayerOverlay";
 import PlayerVideo from "../Movies/PlayerVideo";
-import LikeButton from "../Header/LikeButton";
 import "./Watch.css";
 
 const VideoMetaInfo = ({ title, year, duration, rating, genres, description }) => {
@@ -15,7 +15,7 @@ const VideoMetaInfo = ({ title, year, duration, rating, genres, description }) =
         <div className="action-buttons action-buttons-watch">
           <PlayButton onClick={() => setShowPlayer(true)}></PlayButton>
           <WishlistButton/>
-          <LikeButton/>
+          <HeartButton />
           </div>
           {showPlayer ? (
             <PlayerOverlay onClick={() => setShowPlayer(false)}>

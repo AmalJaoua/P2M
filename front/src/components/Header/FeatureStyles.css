@@ -139,7 +139,36 @@ button.play-button:hover svg {
   transform: translateY(-3px);
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
 }
-.liked-icon {
-  color: #724C9C;}
 .action-buttons {
   display: flex;}
+  .heart-button {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    background: transparent;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    align-self: end;
+    margin-bottom: 7px;
+    margin-left: 10px;
+  }
+  
+  .heart-button:hover {
+    background: #fff;
+    color: #724C9C;
+    transform: translateY(-3px);
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
+  }
+  .heart-button.is-filled {
+    background: #fff;
+    color: #724C9C;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
+  }
+  .heart-icon {
+    width: 24px;
+    height: 24px;
+  }
