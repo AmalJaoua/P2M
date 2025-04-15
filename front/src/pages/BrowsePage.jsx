@@ -23,7 +23,7 @@ import PlayerVideo from "../components/Movies/PlayerVideo";
 import PlayerOverlay from "../components/Movies/PlayerOverlay";
 import FooterCompound from "../compounds/FooterCompound";
 import WishlistButton from "../components/Header/WishlistButton";
-
+import HeartButton from '../components/Header/HeartButton';
 function BrowsePage() {
   let series = [
     { title: "Documentaries", data: seriesData.filter((item) => item.genre === "documentaries") },
@@ -75,6 +75,7 @@ function BrowsePage() {
           <div className="action-buttons">
           <PlayButton onClick={() => setShowPlayer(true)}></PlayButton>
           <WishlistButton/>
+          <HeartButton />
           </div>
           {showPlayer ? (
             <PlayerOverlay onClick={() => setShowPlayer(false)}>
@@ -113,6 +114,7 @@ function BrowsePage() {
                 <div className="action-buttons">
                   <PlayButton onClick={() => setShowPlayer(true)}></PlayButton>
                   <WishlistButton/>
+                  <HeartButton />
                 </div>
                 {showPlayer ? (
                   <PlayerOverlay onClick={() => setShowPlayer(false)}>
