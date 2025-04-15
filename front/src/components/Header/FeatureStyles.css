@@ -3,6 +3,9 @@
 .feature-wrapper-home {
   text-align: center;
 }
+.feature-wrapper-browse{
+  padding: 30px 50px;
+}
 
 .feature-title-home,
 .feature-title-browse {
@@ -136,5 +139,7 @@ button.play-button:hover svg {
   transform: translateY(-3px);
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
 }
+.liked-icon {
+  color: #724C9C;}
 .action-buttons {
   display: flex;}

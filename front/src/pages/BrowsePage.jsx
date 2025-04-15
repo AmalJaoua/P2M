@@ -1,14 +1,9 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { series as seriesData, films as filmsData } from "../seeder1";
-import HeaderWrapper from "../components/Header/HeaderWrapper";
-import NavBar from "../components/Header/NavBar";
-import Logo from "../components/Header/Logo";
-import FeatureWrapper from "../components/Header/FeatureWrapper";
-import FeatureTitle from "../components/Header/FeatureTitle";
-import FeatureSubTitle from "../components/Header/FeatureSubTitle";
+import Header from "../components/Watch/Header";
+import HeroSection from "../components/Watch/HeroSection";
 import PlayButton from "../components/Header/PlayButton";
-import HeaderLink from "../components/Header/HeaderLink";
 import AllSlidesWrapper from "../components/Movies/AllSlidesWrapper";
 import SlideWrapper from "../components/Movies/SlideWrapper";
 import SlideTitle from "../components/Movies/SlideTitle";
@@ -23,6 +18,7 @@ import PlayerVideo from "../components/Movies/PlayerVideo";
 import PlayerOverlay from "../components/Movies/PlayerOverlay";
 import FooterCompound from "../compounds/FooterCompound";
 import WishlistButton from "../components/Header/WishlistButton";
+import VideoMetaInfo from "../components/Watch/VideoMetaInfo";
 
 function BrowsePage() {
   let series = [
@@ -47,43 +43,31 @@ function BrowsePage() {
   const [showCardFeature, setShowCardFeature] = useState(false);
   const [activeItem, setActiveItem] = useState(null);
   const [showPlayer, setShowPlayer] = useState(false);
-
+  const videoData = {title: "Blind Origin",
+    year: "2021",
+    duration: "1 hr 43 min",
+    rating: "TV-MA",
+    genres: ["Sci-fi"],
+    description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+    backgroundImage: "https://aztec.progressionstudios.com/wp-content/uploads/2021/08/sandro-katalina-k1bO_VTiZSs-unsplash-1400x800.jpg",
+    thumbnail: "https://aztec.progressionstudios.com/wp-content/uploads/2021/08/thumbnail.jpg",
+    videoUrl: "https://aztec.progressionstudios.com/wp-content/uploads/2021/08/video.mp4",}
   return (
     <>
-      <HeaderWrapper className="header-wrapper-browse">
-        <NavBar className="navbar-browse">
-          <Logo />
-          <HeaderLink
-            className={category === "films" ? "header-link-bold" : "header-link"}
-            onClick={() => setCategory("films")}
-          >
-            Films
-          </HeaderLink>
-          <HeaderLink
-            className={category === "series" ? "header-link-bold" : "header-link"}
-            onClick={() => setCategory("series")}
-          >
-            Series
-          </HeaderLink>
-        </NavBar>
-        <FeatureWrapper>
-          <FeatureTitle className="feature-title-browse">Watch Joker Now</FeatureTitle>
-          <FeatureSubTitle className="feature-subtitle-browse">
-            Forever alone in a crowd, failed comedian Arthur Fleck seeks connection as he walks
-            the streets of Gotham City...
-          </FeatureSubTitle>
-          <div className="action-buttons">
-          <PlayButton onClick={() => setShowPlayer(true)}></PlayButton>
-          <WishlistButton/>
-          </div>
-          {showPlayer ? (
-            <PlayerOverlay onClick={() => setShowPlayer(false)}>
-              <PlayerVideo src="./videos/video.mp4" type="video/mp4" />
-            </PlayerOverlay>
-          ) : null}
-        </FeatureWrapper>
-      </HeaderWrapper>
-
+        <Header />
+        <HeroSection 
+        backgroundImage={videoData.backgroundImage}
+        thumbnail={videoData.thumbnail}
+        videoUrl={videoData.videoUrl}
+        />
+        <VideoMetaInfo 
+          title={videoData.title}
+          year={videoData.year}
+          duration={videoData.duration}
+          rating={videoData.rating}
+          genres={videoData.genres}
+          description={videoData.description}
+        />
       <AllSlidesWrapper>
         {currentCategory.map((slideItem) => (
           <SlideWrapper key={`${category}-${slideItem.title.toLowerCase()}`}>
