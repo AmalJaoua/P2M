@@ -5,6 +5,7 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 const authRoutes = require('./routes/auth.routes');
 const profileRoutes = require('./routes/profile.routes');
+const contentRoutes = require('./routes/content.routes');
 
 const mongoose = require('mongoose');
 const config = require('./config/config.js');
@@ -28,6 +29,8 @@ mongoose.connect(config.mongoUri, {
     });
 app.use('/auth', authRoutes); // Authentication routes (signup/login)
 app.use('/profile', profileRoutes);
+app.use('/content', contentRoutes);
+
 app.listen(PORT, () => {
     console.log(`Server is running at http://localhost:${PORT}`);
 });
