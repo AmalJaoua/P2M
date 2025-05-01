@@ -2,7 +2,7 @@ import os
 import subprocess
 
 def extract_audio(video_path, output_audio_path):
-    ffmpeg_path = r"C:\ffmpeg\bin\ffmpeg.exe"
+    ffmpeg_path = r"C:\ffmpeg\ffmpeg.exe"
     command = [
         ffmpeg_path,
         "-i", video_path,

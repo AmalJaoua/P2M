@@ -5,12 +5,14 @@ import SigninPage from "./pages/SigninPage";
 import SignupPage from "./pages/SignupPage";
 import BrowsePage from "./pages/BrowsePage";
 import WatchPage from "./pages/WatchPage";
-
+import TestWatch from "./pages/HLSVideoPlayer"
 function App() {
   return (
     <Router>
       <Routes>  
-        <Route path="/" element={<HomePage />} />  
+        <Route path="/" element={<HomePage />} /> 
+        <Route path="/testwatch" element={<TestWatch />} /> 
+        
         <Route path="/signin" element={<SigninPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/browse" element={<BrowsePage />} />
