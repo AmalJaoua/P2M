@@ -2,7 +2,7 @@ import whisper
 import os
 
 def transcribe_audio(audio_path):
-    os.environ["FFMPEG_BINARY"] = r"C:\ffmpeg\bin\ffmpeg.exe" 
+    os.environ["FFMPEG_BINARY"] = r"C:\ffmpeg\ffmpeg.exe" 
     print("Loading Whisper model...")
     model = whisper.load_model("base")  
 

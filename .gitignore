@@ -23,3 +23,9 @@ venv
 *.sln
 *.sw?
 .env
+# .gitignore
+/back/videos/*
+!/back/videos/.gitkeep
+/back/hls/*
+!/back/hls/.gitkeep
+/back/ffmpeg/*
