@@ -187,6 +187,9 @@ def clean_movie_dataset(root_path):
     df = extract_imdb_ids(df)
     print("Dataset fully cleaned and ready for processing!")
     print(df.columns)
+
+        # Save cleaned dataset to CSV
+    df.to_csv('cleaned_movie_data.csv', index=False)
     return df
 
-clean_movie_dataset( r"C:\Users\amalj\Desktop\SupCom\INDP2\Projets\P2M\Movie DataSet\Data")
+clean_movie_dataset( r".\Data")

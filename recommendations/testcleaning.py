@@ -5,7 +5,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 # STEP 1: Define your dataset path
-data_path = r"C:\Users\amalj\Desktop\SupCom\INDP2\Projets\P2M\Movie DataSet\Data"
+data_path = r".\Data"
 
 # STEP 2: Clean the dataset
 clean_df = clean_movie_dataset(data_path)

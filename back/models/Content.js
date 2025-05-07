@@ -7,6 +7,7 @@ const ContentSchema = new mongoose.Schema({
   release_year: { type: Date },
   genres: [{ type: String }],
   director:{type: String},
+  poster_url: { type: String }, // Add this line
   cast: [{ type: String }],
   watch_count: { type: Number, default: 0 },
   languages_available: [{ type: String }],
