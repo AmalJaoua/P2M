@@ -68,7 +68,7 @@ async function seedDatabase() {
                       streaming_links: row.streaming_links ? row.streaming_links.split(',').map(link => link.trim()) : [],
                       episodes: [],
                       rating: parseFloat(row.Rating) || 0, // Add rating (convert to float)
-                      MPA: row.MPA || '', // Add MPA (Rating info)
+                      mpa: row.MPA || '', // Add MPA (Rating info)
                     };
 
                     const content = new Content(movieData);

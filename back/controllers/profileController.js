@@ -75,72 +75,72 @@ exports.removeFromWishlist = async (req, res) => {
       res.status(500).json({ error: 'Internal server error' });
     }
   };
-  exports.addToLikes = async (req, res) => {
-    try {
-      const userId = req.user.id;
-      const contentId = req.query.content_id;
-  
-      if (!contentId) {
-        return res.status(400).json({ error: 'Content ID is required' });
-      }
-  
-      const content = await Content.findById(contentId);
-      if (!content) {
-        return res.status(404).json({ error: 'Content not found' });
-      }
-  
-      const profile = await Profile.findOne({ userId });
-      if (!profile) {
-        return res.status(404).json({ error: 'Profile not found' });
-      }
-  
-      const alreadyLiked = profile.like_history.some(item =>
-        item.content_id.toString() === contentId
-      );
-      if (alreadyLiked) {
-        return res.status(409).json({ message: 'Content already liked' });
-      }
-  
-      profile.like_history.push({ content_id: contentId });
-      await profile.save();
-  
-      return res.status(200).json({ message: 'Content added to liked list', profile });
-    } catch (err) {
-      console.error('Error adding to likes:', err);
-      res.status(500).json({ error: 'Internal server error' });
+// Add to Likes
+exports.addToLikes = async (req, res) => {
+  try {
+    const userId = req.user.id; // Get the user ID from the request (authentication)
+    const contentId = req.query.content_id; // Get the content ID from query parameter
+
+    if (!contentId) {
+      return res.status(400).json({ error: 'Content ID is required' });
     }
-  };
-  exports.removeFromLikes = async (req, res) => {
-    try {
-      const userId = req.user.id;
-      const contentId = req.query.content_id;
-  
-      if (!contentId) {
-        return res.status(400).json({ error: 'Content ID is required' });
-      }
-  
-      const profile = await Profile.findOne({ userId });
-      if (!profile) {
-        return res.status(404).json({ error: 'Profile not found' });
-      }
-  
-      const index = profile.like_history.findIndex(item =>
-        item.content_id.toString() === contentId
-      );
-  
-      if (index === -1) {
-        return res.status(404).json({ message: 'Content not found in liked list' });
-      }
-  
-      profile.like_history.splice(index, 1);
-      await profile.save();
-  
-      return res.status(200).json({ message: 'Content removed from liked list', profile });
-    } catch (err) {
-      console.error('Error removing from likes:', err);
-      res.status(500).json({ error: 'Internal server error' });
+
+    // Find the content by ID
+    const content = await Content.findById(contentId);
+    if (!content) {
+      return res.status(404).json({ error: 'Content not found' });
     }
-  };
+
+    // Check if the user has already liked the content
+    const alreadyLiked = content.likes.some(userId => userId.toString() === req.user.id);
+    if (alreadyLiked) {
+      return res.status(409).json({ message: 'Content already liked' });
+    }
+
+    // Add the user ID to the likes array in the Content model
+    content.likes.push(userId);
+    await content.save();
+
+    return res.status(200).json({ message: 'Content added to liked list', content });
+  } catch (err) {
+    console.error('Error adding to likes:', err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
+// Remove from Likes
+exports.removeFromLikes = async (req, res) => {
+  try {
+    const userId = req.user.id; // Get the user ID from the request (authentication)
+    const contentId = req.query.content_id; // Get the content ID from query parameter
+
+    if (!contentId) {
+      return res.status(400).json({ error: 'Content ID is required' });
+    }
+
+    // Find the content by ID
+    const content = await Content.findById(contentId);
+    if (!content) {
+      return res.status(404).json({ error: 'Content not found' });
+    }
+
+    // Check if the user has liked the content
+    const index = content.likes.indexOf(userId);
+    if (index === -1) {
+      return res.status(404).json({ message: 'Content not found in liked list' });
+    }
+
+    // Remove the user ID from the likes array in the Content model
+    content.likes.splice(index, 1);
+    await content.save();
+
+    return res.status(200).json({ message: 'Content removed from liked list', content });
+  } catch (err) {
+    console.error('Error removing from likes:', err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
   
 exports.getMyProfile = async (req, res) => {
   try {

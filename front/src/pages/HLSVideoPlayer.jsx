@@ -1,6 +1,33 @@
 import React, { useEffect, useRef, useState } from 'react';
-import HlsPlayer from 'react-hls-player';
 import { useNavigate } from 'react-router-dom';
+import HlsPlayer from 'react-hls-player';
+import { FaPlay, FaPause, FaClosedCaptioning, FaBackward, FaForward, FaArrowsAlt } from 'react-icons/fa';
+import { IoLanguage } from 'react-icons/io5';
+
+// Memoize the HlsPlayer component to prevent re-renders
+const HlsPlayerWrapper = React.memo(({ src, playerRef }) => (
+  <HlsPlayer
+    src={src}
+    autoPlay={false}
+    controls={false}
+    playerRef={playerRef}
+    width="100%"
+    height="100%"
+    style={styles.video}
+    hlsConfig={{
+      autoStartLoad: true,
+      maxBufferLength: 10,
+      maxMaxBufferLength: 30,
+      maxBufferSize: 50 * 1000 * 1000,
+      bufferLow: 0.2,
+      bufferHigh: 0.9,
+      startLevel: -1,
+      capLevelToPlayerSize: true,
+      abrEwmaFastLive: 2.0,
+      abrEwmaSlowLive: 6.0,
+    }}
+  />
+));
 
 const HLSVideoPlayer = ({
   src = "http://localhost:3000/hls/myvideo1/master.m3u8",
@@ -16,7 +43,20 @@ const HLSVideoPlayer = ({
   const [progress, setProgress] = useState(0);
   const [selectedLanguage, setSelectedLanguage] = useState('');
   const [showControls, setShowControls] = useState(true);
+  const [captionsEnabled, setCaptionsEnabled] = useState(false);  // New state for captions
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // Adding event listeners when the component mounts
+    document.addEventListener('click', handleClickOrKeyPress);
+    document.addEventListener('keydown', handleClickOrKeyPress);
+
+    return () => {
+      // Cleanup event listeners when the component unmounts
+      document.removeEventListener('click', handleClickOrKeyPress);
+      document.removeEventListener('keydown', handleClickOrKeyPress);
+    };
+  }, []);
 
   // Set playback rate
   useEffect(() => {
@@ -35,7 +75,8 @@ const HLSVideoPlayer = ({
   useEffect(() => {
     const video = playerRef.current;
     const updateProgress = () => {
-      setProgress((video.currentTime / video.duration) * 100);
+      const newProgress = (video.currentTime / video.duration) * 100;
+      setProgress(prev => Math.abs(prev - newProgress) > 0.1 ? newProgress : prev);
     };
     if (video) {
       video.addEventListener('timeupdate', updateProgress);
@@ -111,6 +152,18 @@ const HLSVideoPlayer = ({
     }
   };
 
+  // Toggle captions on/off
+  const toggleCaptions = () => {
+    const video = playerRef.current;
+    if (video) {
+      const textTracks = video.textTracks;
+      for (let i = 0; i < textTracks.length; i++) {
+        textTracks[i].mode = captionsEnabled ? 'hidden' : 'showing';
+      }
+    }
+    setCaptionsEnabled(prev => !prev);
+  };
+
   // Navigate to another page
   const handleArrowClick = () => {
     navigate(goToPage);
@@ -170,46 +223,31 @@ const HLSVideoPlayer = ({
   }, []);
 
   return (
-    <div
-      style={styles.container}
-      onClick={handleClickOrKeyPress}
-      tabIndex="0"
-      onKeyDown={handleClickOrKeyPress}
-    >
-      <HlsPlayer
-        src={src}
-        autoPlay={false}
-        controls={false}
-        playerRef={playerRef}
-        width="100%"
-        height="100%"
-        style={styles.video}
-      />
+    <div style={styles.container}>
+      <HlsPlayerWrapper src={src} playerRef={playerRef} />
+
       {showControls && (
         <>
-          <div style={styles.controls} className="button-container">
-            <button style={styles.button} onClick={() => skip(-5)}>⏪ -5s</button>
-            <button style={styles.button} onClick={togglePlay}>
-              {isPlaying ? '⏸ Pause' : '▶️ Play'}
-            </button>
-            <button style={styles.button} onClick={() => skip(5)}>⏩ +5s</button>
-            <button style={styles.button} onClick={toggleFullScreen}>🖵 Fullscreen</button>
-            <select
-              style={styles.select}
-              value={selectedLanguage}
-              onChange={changeSubtitleLanguage}
-            >
-              <option value="">Select Subtitle Language</option>
-              {subtitles.map((language, index) => (
-                <option key={index} value={language}>{language}</option>
-              ))}
-            </select>
-          </div>
-
+          {/* Progress Bar */}
           <div className="button-container" style={styles.progressBarContainer} onClick={handleSeek}>
             <div style={{ ...styles.progressBar, width: `${progress}%` }} />
           </div>
 
+          {/* Controls */}
+          <div style={styles.controls} className="button-container">
+            <button style={styles.button} onClick={() => skip(-5)}><FaBackward /> -5s</button>
+            <button style={styles.button} onClick={togglePlay}>
+              {isPlaying ? <FaPause /> : <FaPlay />} 
+            </button>
+            <button style={styles.button} onClick={() => skip(5)}><FaForward /> +5s</button>
+            <button style={styles.button} onClick={toggleFullScreen}><FaArrowsAlt /> </button>
+            <button style={styles.button} onClick={toggleCaptions}>
+              <FaClosedCaptioning /> Captions
+            </button>
+           
+          </div>
+
+          {/* Arrow Button */}
           <div style={styles.arrowContainer}>
             <button onClick={handleArrowClick} style={styles.arrowButton}>←</button>
           </div>
@@ -250,17 +288,18 @@ const styles = {
   },
   button: {
     padding: '10px 15px',
-    backgroundColor: '#CB9DF0',
     border: 'none',
     borderRadius: '8px',
     fontSize: '16px',
     color: '#fff',
     cursor: 'pointer',
     boxShadow: '0 2px 6px rgba(0,0,0,0.3)',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '5px',
   },
   select: {
     padding: '10px',
-    backgroundColor: '#CB9DF0',
     border: 'none',
     borderRadius: '8px',
     fontSize: '16px',
@@ -274,7 +313,7 @@ const styles = {
     height: '8px',
     width: '100%',
     backgroundColor: '#444',
-    zIndex: 1000,
+    zIndex: 1002, // Increased zIndex to ensure it stays on top
     cursor: 'pointer',
   },
   progressBar: {
@@ -288,9 +327,9 @@ const styles = {
     left: '10px',
     zIndex: 1001,
   },
+
   arrowButton: {
     padding: '10px',
-    backgroundColor: '#4F1787',
     border: 'none',
     borderRadius: '50%',
     fontSize: '20px',

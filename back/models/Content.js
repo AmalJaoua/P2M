@@ -6,8 +6,8 @@ const ContentSchema = new mongoose.Schema({
   description: { type: String },
   release_year: { type: Date },
   genres: [{ type: String }],
-  director:{type: String},
-  poster_url: { type: String }, // Add this line
+  director: { type: String },
+  poster_url: { type: String },
   cast: [{ type: String }],
   watch_count: { type: Number, default: 0 },
   languages_available: [{ type: String }],
@@ -27,7 +27,10 @@ const ContentSchema = new mongoose.Schema({
       release_date: { type: Date },
       streaming_links: [{ type: String }]
     }
-  ]
+  ],
+  likes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }], // User IDs who liked
+  mpa: { type: String }, // MPA rating
+  rating: { type: Number, min: 0, max: 10 } // Rating field (float between 0 and 10)
 });
 
 module.exports = mongoose.model('Content', ContentSchema);

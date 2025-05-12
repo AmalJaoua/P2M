@@ -18,12 +18,7 @@ const ProfileSchema = new mongoose.Schema({
       is_finished: { type: Boolean }
     }
   ],
-  like_history: [
-    {
-      _id: false,
-      content_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Content' }
-    }
-  ],
+ 
   preferences: [{ type: String }]
 });
 
