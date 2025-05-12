@@ -1,5 +1,5 @@
-// SearchComponent.jsx
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Search, X } from 'lucide-react';
 import './Search.css';
 
@@ -7,12 +7,10 @@ const SearchC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 658);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 658);
-    };
-
+    const handleResize = () => setIsMobile(window.innerWidth < 658);
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
@@ -20,15 +18,15 @@ const SearchC = () => {
   const handleSearchToggle = () => {
     setIsSearchOpen(!isSearchOpen);
     if (!isSearchOpen) {
-      // Focus the input when opening
       setTimeout(() => document.querySelector('.search-field')?.focus(), 0);
     }
   };
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    console.log('Searching for:', searchQuery);
-    // Handle backend logic here
+    if (searchQuery.trim() === '') return;
+    navigate(`/search?query=${encodeURIComponent(searchQuery.trim())}`);
+    setIsSearchOpen(false); // Close search bar after navigating (optional)
   };
 
   return (
@@ -46,14 +44,13 @@ const SearchC = () => {
               <Search className="search-icon-mobile" size={20} />
             )}
           </button>
-
           {isSearchOpen && (
             <div className="search-panel">
               <form className="search-form" onSubmit={handleSearchSubmit}>
                 <input
                   type="search"
                   className="search-field"
-                  placeholder="Search "
+                  placeholder="Search"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   name="search_keyword"
@@ -67,7 +64,7 @@ const SearchC = () => {
           )}
         </>
       ) : (
-        <div className="search-group">
+        <form className="search-group" onSubmit={handleSearchSubmit}>
           <input
             placeholder="Search"
             type="search"
@@ -76,7 +73,7 @@ const SearchC = () => {
             onChange={(e) => setSearchQuery(e.target.value)}
           />
           <Search className="search-icon" />
-        </div>
+        </form>
       )}
     </div>
   );

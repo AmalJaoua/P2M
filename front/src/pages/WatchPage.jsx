@@ -8,7 +8,6 @@ import '../components/Watch/Watch.css';
 
 const WatchPage = () => {
   const [activeTab, setActiveTab] = useState('season1');
-  
   // Mock data would be replaced with API calls in a real app
   const videoData = {
     title: "Blind Origin",
@@ -57,6 +56,7 @@ const WatchPage = () => {
       ]
     }
   };
+  const hasSeasons = videoData.seasons && Object.keys(videoData.seasons).length > 0;
 
   return (
     <>
@@ -74,11 +74,13 @@ const WatchPage = () => {
         genres={videoData.genres}
         description={videoData.description}
     />
-      <SeasonTabs 
-        seasons={videoData.seasons} 
-        activeTab={activeTab}
-        onTabChange={setActiveTab}
-      />
+       {hasSeasons && (
+        <SeasonTabs 
+          seasons={videoData.seasons} 
+          activeTab={activeTab}
+          onTabChange={setActiveTab}
+        />
+      )}
     <FooterCompound />
     </>
   );

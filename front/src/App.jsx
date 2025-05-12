@@ -6,17 +6,18 @@ import SignupPage from "./pages/SignupPage";
 import BrowsePage from "./pages/BrowsePage";
 import WatchPage from "./pages/WatchPage";
 import TestWatch from "./pages/HLSVideoPlayer"
+import SearchResults from "./pages/SearchResults";
 function App() {
   return (
     <Router>
       <Routes>  
         <Route path="/" element={<HomePage />} /> 
         <Route path="/testwatch" element={<TestWatch />} /> 
-        
         <Route path="/signin" element={<SigninPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/browse" element={<BrowsePage />} />
         <Route path="/watch" element={<WatchPage/>} />
+        <Route path="/search" element={<SearchResults/>} />
       </Routes>
     </Router>
   );

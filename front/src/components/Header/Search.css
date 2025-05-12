@@ -59,7 +59,9 @@
   .search-icon-button:hover {
     color: #9356A0;
   }
-  
+  .search-icon-mobile{
+    color: #9356A0;
+  }
   .search-icon {
     transition: transform 0.2s ease;
   }
