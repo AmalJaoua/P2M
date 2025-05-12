@@ -22,10 +22,30 @@ exports.getContentById = async (req, res) => {
     }
   };
   
-  
-  
-  
-  
-  
-  
-  
+
+exports.searchContent = async (req, res) => {
+  const { q } = req.query;
+
+  if (!q) {
+    return res.status(400).json({ error: 'Missing search query' });
+  }
+
+  try {
+    // First, search by title and sort by rating descending
+    let results = await Content.find({
+      title: { $regex: q, $options: 'i' }
+    }).sort({ rating: -1 });
+
+    // If no results in title, search by description (also sorted by rating)
+    if (results.length === 0) {
+      results = await Content.find({
+        description: { $regex: q, $options: 'i' }
+      }).sort({ rating: -1 });
+    }
+
+    res.status(200).json(results);
+  } catch (err) {
+    console.error('Search error:', err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};

@@ -94,20 +94,7 @@
     gap: 8px;
   }
   
-  .search-field {
-    flex: 1;
-    padding: 8px 12px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    font-size: 14px;
-    outline: none;
-    transition: border-color 0.3s, box-shadow 0.3s;
-  }
   
-  .search-field:focus {
-    border-color: #724C9C;
-    box-shadow: 0 0 0 2px (#DCCAE9, 0.2);
-  }
   
   .search-submit {
     padding: 8px;
